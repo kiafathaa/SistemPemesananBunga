@@ -6,28 +6,56 @@ public class Main {
         FlowerShop shop = new FlowerShop();
 
         System.out.println("=== SISTEM PEMESANAN BUNGA ===");
+        System.out.print("Masukkan nama pelanggan: ");
+        String nama = input.nextLine();
+        System.out.print("Masukkan nomor HP: ");
+        String noHp = input.nextLine();
 
-        System.out.print("Masukkan Nama Pelanggan: ");
-        String name = input.nextLine();
-        System.out.print("Masukkan No. Telepon: ");
-        String phone = input.nextLine();
-        System.out.print("Masukkan Alamat: ");
-        String address = input.nextLine();
+        Customer customer = new Customer(nama, noHp);
 
-        Customer customer = new Customer(name, phone, address);
-
+        System.out.println("\nDaftar Bunga:");
         shop.displayFlowers();
-        System.out.print("Pilih nomor bunga: ");
-        int choice = input.nextInt();
-        Flower selectedFlower = shop.getFlower(choice - 1);
 
-        System.out.print("Masukkan jumlah pembelian: ");
-        int quantity = input.nextInt();
+        System.out.print("Pilih bunga (1-" + shop.getFlowers().size() + "): ");
+        int index = input.nextInt() - 1;
 
-        Order order = new Order(customer, selectedFlower, quantity);
-        order.displayOrder();
+        System.out.print("Masukkan jumlah: ");
+        int jumlah = input.nextInt();
 
-        Payment payment = new Payment(order.calculateTotal());
-        payment.processPayment();
+        Flower flower = shop.getFlower(index);
+        if (flower == null) {
+            System.out.println("Pesanan gagal, bunga tidak ditemukan.");
+            return;
+        }
+
+        Order order = new Order(customer, flower, jumlah);
+
+        double total = order.calculateTotal();
+        System.out.println("\nTotal: Rp " + total);
+
+        System.out.print("Lanjut ke pembayaran? (y/n): ");
+        char pilih = input.next().toLowerCase().charAt(0);
+
+        if (pilih == 'y') {
+            Payment payment = new Payment(total);
+            payment.konfirmasiPembayaran(true);
+            order.setPayment(payment);
+
+            System.out.println("\n===== DETAIL PESANAN =====");
+            order.displayOrder();
+
+        } else if (pilih == 'n') {
+            Payment payment = new Payment(total);
+            payment.konfirmasiPembayaran(false);
+            order.setPayment(payment);
+
+            System.out.println("\n===== PESANAN DIBATALKAN =====");
+            order.displayOrder();
+
+        } else {
+            System.out.println("\nInput tidak valid. Silakan ulangi.");
+        }
+
+        input.close();
     }
 }

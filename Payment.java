@@ -1,11 +1,27 @@
 public class Payment {
-    private double totalAmount;
+    private double totalBayar;
+    private String status;
 
-    public Payment(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public Payment(double totalBayar) {
+        this.totalBayar = totalBayar;
+        this.status = "BELUM BAYAR";
     }
 
-    public void processPayment() {
-        System.out.println("Pembayaran sebesar Rp" + totalAmount + " berhasil diproses!");
+    public void konfirmasiPembayaran(boolean bayar) {
+        if (bayar) {
+            status = "LUNAS";
+            System.out.println("Pembayaran berhasil! Status: " + status);
+        } else {
+            status = "DIBATALKAN";
+            System.out.println("Pembayaran dibatalkan.");
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public double getTotalBayar() {
+        return totalBayar;
     }
 }

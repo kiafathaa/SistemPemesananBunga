@@ -1,12 +1,22 @@
 public class Flower {
-    private String name;
-    private double price;
+    private String nama;
+    private double harga;
 
-    public Flower(String name, double price) {
-        this.name = name;
-        this.price = price;
+    public Flower(String nama, double harga) {
+        this.nama = nama;
+        this.harga = harga;
     }
 
-    public String getName() { return name; }
-    public double getPrice() { return price; }
+    public String getNama() {
+        return nama;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    @Override
+    public String toString() {
+        return nama + " - Rp " + harga;
+    }
 }

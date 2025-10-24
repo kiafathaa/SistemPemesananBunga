@@ -1,21 +1,17 @@
 public class Customer {
-    private String name;
-    private String phone;
-    private String address;
+    private String nama;
+    private String noHp;
 
-    public Customer(String name, String phone, String address) {
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
+    public Customer(String nama, String noHp) {
+        this.nama = nama;
+        this.noHp = noHp;
     }
 
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
-    public String getAddress() { return address; }
+    public String getNama() {
+        return nama;
+    }
 
-    public void displayCustomerInfo() {
-        System.out.println("Nama Pelanggan: " + name);
-        System.out.println("No. Telepon   : " + phone);
-        System.out.println("Alamat        : " + address);
+    public String getNoHp() {
+        return noHp;
     }
 }

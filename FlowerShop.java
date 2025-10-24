@@ -1,25 +1,31 @@
+import java.util.ArrayList;
+
 public class FlowerShop {
-    private Flower[] flowers;
+    private ArrayList<Flower> flowers;
 
     public FlowerShop() {
-        flowers = new Flower[] {
-            new Flower("Mawar", 15000),
-            new Flower("Tulip", 20000),
-            new Flower("Anggrek", 25000)
-        };
+        flowers = new ArrayList<>();
+        flowers.add(new Flower("Mawar", 25000));
+        flowers.add(new Flower("Tulip", 30000));
+        flowers.add(new Flower("Lily", 28000));
     }
 
     public void displayFlowers() {
-        System.out.println("\n=== Daftar Bunga ===");
-        for (int i = 0; i < flowers.length; i++) {
-            System.out.println((i+1) + ". " + flowers[i].getName() + " - Rp" + flowers[i].getPrice());
+        for (int i = 0; i < flowers.size(); i++) {
+            System.out.println((i + 1) + ". " + flowers.get(i));
         }
     }
 
     public Flower getFlower(int index) {
-        if (index >= 0 && index < flowers.length) {
-            return flowers[index];
+        if (index >= 0 && index < flowers.size()) {
+            return flowers.get(index);
+        } else {
+            System.out.println("Pilihan tidak valid!");
+            return null;
         }
-        return null;
+    }
+
+    public ArrayList<Flower> getFlowers() {
+        return flowers;
     }
 }
